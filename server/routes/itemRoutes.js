@@ -1,34 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const item = require('../models/item');
+const Item = require("../models/item");
 
-// Create new item
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name, type, description, coverImage, additionalImages } = req.body;
-    
-    const newItem = new item({
+
+    const newItem = new Item({
       name,
       type,
       description,
       coverImage,
-      additionalImages
+      additionalImages,
     });
 
     const savedItem = await newItem.save();
     res.status(201).json({
-      message: 'Item successfully added!',
-      item: savedItem
+      message: "Item successfully added!",
+      item: savedItem,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Get all items
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const items = await item.find().sort({ createdAt: -1 });
+    const items = await Item.find().sort({ createdAt: -1 });
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
