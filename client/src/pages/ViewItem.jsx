@@ -9,6 +9,9 @@ export default function ViewItemsPage() {
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);
+ const OnEnquire=()=>{
+  alert('Enquiry email sent!');
+ } 
 
   return (
     <div className="container mx-auto p-6">
@@ -20,9 +23,7 @@ export default function ViewItemsPage() {
             className="border rounded-lg p-4 cursor-pointer hover:shadow-md"
             onClick={() => setSelected(item)}
           >
-            <img
-              src={item.coverImage}
-              alt={item.name}
+           <img src={item.coverImage} alt={item.name} loading="lazy"
               className="w-full h-48 object-contain mb-2"
             />
             <h3 className="font-semibold">{item.name}</h3>
@@ -47,6 +48,7 @@ export default function ViewItemsPage() {
               <img
                 src={selected.coverImage}
                 alt={selected.name}
+                loading="lazy"
                 className="w-full max-h-96 object-contain my-4"
               />
               <div className="space-y-2">
@@ -64,11 +66,12 @@ export default function ViewItemsPage() {
                       key={idx}
                       src={img}
                       alt={`Additional ${idx + 1}`}
+                      loading="lazy"
                       className="h-24 object-contain border rounded"
                     />
                   ))}
               </div>
-              <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+              <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onClick={OnEnquire}>
                 Enquire
               </button>
             </div>

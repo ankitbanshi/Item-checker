@@ -14,13 +14,11 @@ export default function AddItemForm({ onItemAdded }) {
   });
   const [success, setSuccess] = useState("");
 
-  // Handle text/select input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle cover image file and preview
   const handleCoverImage = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -36,7 +34,6 @@ export default function AddItemForm({ onItemAdded }) {
     }
   };
 
-  // Handle additional images and previews
   const handleAdditionalImages = (e) => {
     const files = Array.from(e.target.files);
     const readers = files.map(
@@ -56,7 +53,6 @@ export default function AddItemForm({ onItemAdded }) {
     });
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const itemData = {
@@ -67,10 +63,10 @@ export default function AddItemForm({ onItemAdded }) {
       additionalImages: form.additionalImages,
     };
     const res = await fetch("http://localhost:5000/api/items", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(itemData),
-});
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(itemData),
+    });
     if (res.ok) {
       setSuccess("Item successfully added!");
       setForm({
@@ -153,7 +149,9 @@ export default function AddItemForm({ onItemAdded }) {
         )}
       </div>
       <div>
-        <label className="block font-semibold mb-1">Item Additional Images:</label>
+        <label className="block font-semibold mb-1">
+          Item Additional Images:
+        </label>
         <input
           type="file"
           accept="image/*"
